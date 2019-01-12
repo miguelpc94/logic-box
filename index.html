@@ -25,27 +25,27 @@
 		
 		<div class="container">
 			<div class="row">
-				<div id="box1" class="bitBoxSize bitBoxColor1">
+				<div id="box0" class="bitBoxSize">
 				</div>
-				<div id="box2" class="bitBoxSize bitBoxColor2">
+				<div id="box1" class="bitBoxSize">
 				</div>
-				<div id="box3" class="bitBoxSize bitBoxColor3">
-				</div>
-			</div>
-			<div class="row">
-				<div id="box4" class="bitBoxSize bitBoxColor4">
-				</div>
-				<div id="box5" class="bitBoxSize bitBoxColor5">
-				</div>
-				<div id="box6" class="bitBoxSize bitBoxColor6">
+				<div id="box2" class="bitBoxSize">
 				</div>
 			</div>
 			<div class="row">
-				<div id="box7" class="bitBoxSize bitBoxColor7">
+				<div id="box3" class="bitBoxSize">
 				</div>
-				<div id="box8" class="bitBoxSize bitBoxColor8">
+				<div id="box4" class="bitBoxSize">
 				</div>
-				<div id="box9" class="bitBoxSize bitBoxColor9">
+				<div id="box5" class="bitBoxSize">
+				</div>
+			</div>
+			<div class="row">
+				<div id="box6" class="bitBoxSize">
+				</div>
+				<div id="box7" class="bitBoxSize">
+				</div>
+				<div id="box8" class="bitBoxSize">
 				</div>
 			</div>
 		</div>
@@ -55,3 +55,57 @@
 		<script src="js/bootstrap.bundle.min.js"></script>
 	</body>
 </html>
+
+<script>
+	const on=1;
+	const off=0;
+	const red=0;
+	const green=1;
+	const blue=2;
+	const boxes=9;
+	
+	function generateRandomBoxColor() {
+		let randomColor=[];
+		randomColor[red] = (100+(Math.random()*155));
+		randomColor[green] = (100+(Math.random()*155));
+		randomColor[blue] = (100+(Math.random()*155));
+		return randomColor;
+	}
+	
+	function halveColor(color) {
+		return [color[red]/2, color[green]/2, color[blue]/2];
+	}
+	
+	function generateBoxColors(numberOfBoxes) {
+		let generatedBoxColors=[];
+		for (let boxNumber=0; boxNumber<numberOfBoxes; boxNumber++) {
+			generatedBoxColors[boxNumber] = [];
+			generatedBoxColors[boxNumber][on] = [];
+			generatedBoxColors[boxNumber][on] = generateRandomBoxColor();
+			generatedBoxColors[boxNumber][off] = [];
+			generatedBoxColors[boxNumber][off] = halveColor(generatedBoxColors[boxNumber][on]);
+		}
+		return generatedBoxColors;
+	}
+	
+	function generateCssColor(color) {
+		return "rgb("+color[red]+","+color[green]+","+color[blue]+")";
+	}
+	
+	function turnBox(onOrOff ,boxNumber) {
+		$("#box"+boxNumber).css("background-color", generateCssColor(boxColors[boxNumber][onOrOff]));
+	}
+	
+	var boxColors=generateBoxColors(boxes);
+	
+	turnBox(on,0);
+	turnBox(on,1);
+	turnBox(on,2);
+	turnBox(on,3);
+	turnBox(on,4);
+	turnBox(on,5);
+	turnBox(on,6);
+	turnBox(on,7);
+	turnBox(on,8);
+	
+</script>
