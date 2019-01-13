@@ -136,16 +136,9 @@
 				}
 			}
 			
-			
-			turnBox(on,0);
-			turnBox(on,1);
-			turnBox(on,2);
-			turnBox(on,15);
-			turnBox(on,4);
-			turnBox(on,5);
-			turnBox(on,6);
-			turnBox(on,7);
-			turnBox(on,8);
+			for (let box=0; box<boxes; box++) {
+				turnBox(on,box);
+			}
 			
 			setInterval(function() {flashBoxes()},250);
 			
