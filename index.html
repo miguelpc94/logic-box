@@ -83,66 +83,7 @@
 
 		<script src="js/jquery-3.3.1.min.js"></script>
 		<script src="js/bootstrap.bundle.min.js"></script>
-		
-		<script>
-			const on=1;
-			const off=0;
-			const red=0;
-			const green=1;
-			const blue=2;
-			const boxes=18;
-			
-			function generateRandomBoxColor() {
-				let randomColor=[];
-				randomColor[red] = (155+(Math.random()*100));
-				randomColor[green] = (155+(Math.random()*100));
-				randomColor[blue] = (155+(Math.random()*100));
-				return randomColor;
-			}
-			
-			function halveColor(color) {
-				return [color[red]/2, color[green]/2, color[blue]/2];
-			}
-			
-			function generateBoxColors(numberOfBoxes) {
-				let generatedBoxColors=[];
-				for (let boxNumber=0; boxNumber<numberOfBoxes; boxNumber++) {
-					generatedBoxColors[boxNumber] = [];
-					generatedBoxColors[boxNumber][on] = [];
-					generatedBoxColors[boxNumber][on] = generateRandomBoxColor();
-					generatedBoxColors[boxNumber][off] = [];
-					generatedBoxColors[boxNumber][off] = halveColor(generatedBoxColors[boxNumber][on]);
-				}
-				return generatedBoxColors;
-			}
-			
-			function generateCssColor(color) {
-				return "rgb("+color[red]+","+color[green]+","+color[blue]+")";
-			}
-			
-			function turnBox(onOrOff ,boxNumber) {
-				$("#box"+boxNumber).css("background-color", generateCssColor(boxColors[boxNumber][onOrOff]));
-			}
-			
-			var boxColors=generateBoxColors(boxes);
-			
-			function flashBoxes() {
-				for (let box=0; box<boxes; box++) {
-					if (Math.random()>0.5) {
-						turnBox(on,box);
-					} else {
-						turnBox(off,box);
-					}
-				}
-			}
-			
-			for (let box=0; box<boxes; box++) {
-				turnBox(on,box);
-			}
-			
-			setInterval(function() {flashBoxes()},250);
-			
-		</script>
+		<script src="js/logic-box.js"></script>
 	</body>
 </html>
 
