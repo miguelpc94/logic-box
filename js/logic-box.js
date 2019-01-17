@@ -1,3 +1,68 @@
+const red=0;
+const green=1;
+const blue=2;
+
+function createBoxSet(rows=1,columns=1) {
+    let boxSet={};
+    boxSet.rows=rows;
+    boxSet.columns=columns;
+    boxSet.canvasID=undefined;
+    boxSet.boxes=[];
+    for (let boxIndex=0; boxIndex<(rows*columns); boxIndex++) {
+        boxSet.boxes[boxIndex]= {
+            colorOn: [255,255,255],
+            colorOff: [255,255,255],
+            state: false
+        };
+    };
+    boxSet.setBoxColorsOn = function(boxColors=[[255,255,255]]) {
+        if (boxColors.length<(this.rows*this.columns)) {
+            return false;
+        }
+        for (let boxIndex=0; boxIndex<(this.rows*this.columns); boxIndex++) {
+            this.boxes[boxIndex].colorOn[red]=boxColors[boxIndex][red];
+            this.boxes[boxIndex].colorOn[green]=boxColors[boxIndex][green];
+            this.boxes[boxIndex].colorOn[blue]=boxColors[boxIndex][blue];
+        }
+    };
+    boxSet.setBoxColorsOff = function(boxColors=[[255,255,255]]) {
+        if (boxColors.length<(this.rows*this.columns)) {
+            return false;
+        }
+        for (let boxIndex=0; boxIndex<(this.rows*this.columns); boxIndex++) {
+            this.boxes[boxIndex].colorOff[red]=boxColors[boxIndex][red];
+            this.boxes[boxIndex].colorOff[green]=boxColors[boxIndex][green];
+            this.boxes[boxIndex].colorOff[blue]=boxColors[boxIndex][blue];
+        }
+        return true;
+    };
+    boxSet.getBoxStates = function() {
+        let boxStates=[];
+        for (let boxIndex=0; boxIndex<(this.rows*this.columns); boxIndex++) {
+            boxStates[boxIndex]=this.boxes[boxIndex].state;
+        }
+        return boxStates;
+    };
+    boxSet.setBoxStates = function(boxStates=[]) {
+        if (boxStates.length<(this.rows*this.columns)) {
+            return false;
+        }
+        for (let boxIndex=0; boxIndex<(this.rows*this.columns); boxIndex++) {
+            this.boxes[boxIndex].state=boxStates[boxIndex];
+        }
+        return true;
+    };
+    boxSet.draw = function() {
+        let canvas = document.querySelector(this.canvasID);
+        let context = canvas.getContext("2d");
+        // UNDER WRITING
+    };
+    return boxSet;
+}
+
+$( document ).ready(function() {
+});
+/*
 $( document ).ready(function() {
     const on=1;
     const off=0;
@@ -67,5 +132,5 @@ $( document ).ready(function() {
     // Fill with gradient
     ctx.fillStyle = grd;
     ctx.fillRect(10,10,140,140);
-
 });
+*/
