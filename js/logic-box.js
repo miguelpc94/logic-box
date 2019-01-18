@@ -1,6 +1,12 @@
 const red=0;
 const green=1;
 const blue=2;
+const boxWidth=50;
+const boxHeight=50;
+
+function generateCssColor(color) {
+    return "rgb("+color[red]+","+color[green]+","+color[blue]+")";
+}
 
 function createBoxSet(rows=1,columns=1) {
     let boxSet={};
@@ -53,9 +59,19 @@ function createBoxSet(rows=1,columns=1) {
         return true;
     };
     boxSet.draw = function() {
-        let canvas = document.querySelector(this.canvasID);
-        let context = canvas.getContext("2d");
-        // UNDER WRITING
+        let context = document.querySelector(this.canvasID).getContext("2d");
+        cx.clearRect(0,0,this.columns*boxWidth,this.columns*boxHeight);
+        for(let row=0; row<this.rows: row++) {
+            for (let column=0; column<this.columns; column++) {
+                box = this.boxes[column+(row*this.columns)];
+                if (box.state) {
+                    context.fillStyle = generateCssColor(box.colorOn);
+                } else {
+                    context.fillStyle = generateCssColor(box.colorOff);
+                }
+                context.fillRect(column*boxWidth, row*boxHeight, (column+1)*boxWidth, (row+1)*boxHeight);
+            }
+        }
     };
     return boxSet;
 }
