@@ -1,11 +1,38 @@
+const on=1;
+const off=0;
 const red=0;
 const green=1;
 const blue=2;
 const boxWidth=50;
 const boxHeight=50;
 
+function generateRandomBoxColor() {
+    let randomColor=[];
+    randomColor[red] = (155+(Math.random()*100));
+    randomColor[green] = (155+(Math.random()*100));
+    randomColor[blue] = (155+(Math.random()*100));
+    return randomColor;
+}
+
+function halveColor(color) {
+    return [color[red]/2, color[green]/2, color[blue]/2];
+}
+
 function generateCssColor(color) {
     return "rgb("+color[red]+","+color[green]+","+color[blue]+")";
+}
+
+function generateBoxColors(numberOfBoxes) {
+    let generatedBoxColors=[];
+    generatedBoxColors[on]=[];
+    generatedBoxColors[off]=[];
+    for (let boxNumber=0; boxNumber<numberOfBoxes; boxNumber++) {
+        generatedBoxColors[on][boxNumber] = [];
+        generatedBoxColors[on][boxNumber] = generateRandomBoxColor();
+        generatedBoxColors[off][boxNumber] = [];
+        generatedBoxColors[off][boxNumber] = halveColor(generatedBoxColors[on][boxNumber]);
+    }
+        return generatedBoxColors;
 }
 
 function createBoxSet(rows=1,columns=1) {
@@ -60,8 +87,8 @@ function createBoxSet(rows=1,columns=1) {
     };
     boxSet.draw = function() {
         let context = document.querySelector(this.canvasID).getContext("2d");
-        cx.clearRect(0,0,this.columns*boxWidth,this.columns*boxHeight);
-        for(let row=0; row<this.rows: row++) {
+        context.clearRect(0,0,this.columns*boxWidth,this.columns*boxHeight);
+        for(let row=0; row<this.rows; row++) {
             for (let column=0; column<this.columns; column++) {
                 box = this.boxes[column+(row*this.columns)];
                 if (box.state) {
@@ -77,6 +104,13 @@ function createBoxSet(rows=1,columns=1) {
 }
 
 $( document ).ready(function() {
+    testBoxSet=createBoxSet(2,2);
+    testBoxSet.canvasID='#boxSet1';
+    generatedColors=generateBoxColors(4);
+    testBoxSet.setBoxColorsOn=generatedColors[on];
+    testBoxSet.setBoxColorsOff=generatedColors[off];
+    testBoxSet.setBoxStates([false,true,true,false]);
+    testBoxSet.draw();
 });
 /*
 $( document ).ready(function() {
@@ -87,17 +121,7 @@ $( document ).ready(function() {
     const blue=2;
     const boxes=18;
                 
-    function generateRandomBoxColor() {
-        let randomColor=[];
-        randomColor[red] = (155+(Math.random()*100));
-        randomColor[green] = (155+(Math.random()*100));
-        randomColor[blue] = (155+(Math.random()*100));
-        return randomColor;
-    }
                 
-    function halveColor(color) {
-        return [color[red]/2, color[green]/2, color[blue]/2];
-    }
                 
     function generateBoxColors(numberOfBoxes) {
         let generatedBoxColors=[];
