@@ -32,7 +32,19 @@ function generateBoxColors(numberOfBoxes) {
         generatedBoxColors[off][boxNumber] = [];
         generatedBoxColors[off][boxNumber] = halveColor(generatedBoxColors[on][boxNumber]);
     }
-        return generatedBoxColors;
+    return generatedBoxColors;
+}
+
+function generateRandomBooleans(numberOfBooleans) {
+    let randomBooleans=[];
+    for (let index=0; index<numberOfBooleans; index++) {
+        if (Math.random()>0.5) {
+            randomBooleans[index]=true;
+        } else {
+            randomBooleans[index]=false;
+        }
+    }
+    return randomBooleans;
 }
 
 function createBoxSet(rows=1,columns=1) {
@@ -96,7 +108,7 @@ function createBoxSet(rows=1,columns=1) {
                 } else {
                     context.fillStyle = generateCssColor(box.colorOff);
                 }
-                context.fillRect(column*boxWidth, row*boxHeight, (column+1)*boxWidth, (row+1)*boxHeight);
+                context.fillRect(column*boxWidth, row*boxHeight, boxWidth, boxHeight);
             }
         }
     };
@@ -104,73 +116,36 @@ function createBoxSet(rows=1,columns=1) {
 }
 
 $( document ).ready(function() {
-    testBoxSet=createBoxSet(2,2);
-    testBoxSet.canvasID='#boxSet1';
-    generatedColors=generateBoxColors(4);
-    testBoxSet.setBoxColorsOn=generatedColors[on];
-    testBoxSet.setBoxColorsOff=generatedColors[off];
-    testBoxSet.setBoxStates([false,true,true,false]);
-    testBoxSet.draw();
+    testBoxSet1=createBoxSet(3,3);
+    testBoxSet1.canvasID='#boxSet1';
+    generatedColors=generateBoxColors(9);
+    testBoxSet1.setBoxColorsOn(generatedColors[on]);
+    testBoxSet1.setBoxColorsOff(generatedColors[off]);
+    testBoxSet1.setBoxStates(generateRandomBooleans(9));
+    testBoxSet1.draw();
+
+    testBoxSet2=createBoxSet(3,3);
+    testBoxSet2.canvasID='#boxSet2';
+    generatedColors=generateBoxColors(9);
+    testBoxSet2.setBoxColorsOn(generatedColors[on]);
+    testBoxSet2.setBoxColorsOff(generatedColors[off]);
+    testBoxSet2.setBoxStates(generateRandomBooleans(9));
+    testBoxSet2.draw();
+
+    testBoxSet3=createBoxSet(3,3);
+    testBoxSet3.canvasID='#boxSet3';
+    generatedColors=generateBoxColors(9);
+    testBoxSet3.setBoxColorsOn(generatedColors[on]);
+    testBoxSet3.setBoxColorsOff(generatedColors[off]);
+    testBoxSet3.setBoxStates(generateRandomBooleans(9));
+    testBoxSet3.draw();
+
+    setInterval(function() {
+        testBoxSet1.setBoxStates(generateRandomBooleans(9));
+        testBoxSet2.setBoxStates(generateRandomBooleans(9));
+        testBoxSet3.setBoxStates(generateRandomBooleans(9));
+        testBoxSet1.draw();
+        testBoxSet2.draw();
+        testBoxSet3.draw();
+    },75);
 });
-/*
-$( document ).ready(function() {
-    const on=1;
-    const off=0;
-    const red=0;
-    const green=1;
-    const blue=2;
-    const boxes=18;
-                
-                
-                
-    function generateBoxColors(numberOfBoxes) {
-        let generatedBoxColors=[];
-        for (let boxNumber=0; boxNumber<numberOfBoxes; boxNumber++) {
-            generatedBoxColors[boxNumber] = [];
-            generatedBoxColors[boxNumber][on] = [];
-            generatedBoxColors[boxNumber][on] = generateRandomBoxColor();
-            generatedBoxColors[boxNumber][off] = [];
-            generatedBoxColors[boxNumber][off] = halveColor(generatedBoxColors[boxNumber][on]);
-        }
-            return generatedBoxColors;
-    }
-                
-    function generateCssColor(color) {
-        return "rgb("+color[red]+","+color[green]+","+color[blue]+")";
-    }
-                
-    function turnBox(onOrOff ,boxNumber) {
-        $("#box"+boxNumber).css("background-color", generateCssColor(boxColors[boxNumber][onOrOff]));
-    }
-                
-    var boxColors=generateBoxColors(boxes);
-                
-    function flashBoxes() {
-        for (let box=0; box<boxes; box++) {
-            if (Math.random()>0.5) {
-                turnBox(on,box);
-            } else {
-                turnBox(off,box);
-            }
-        }
-    }
-                
-    for (let box=0; box<boxes; box++) {
-        turnBox(on,box);
-    }
-                
-    setInterval(function() {flashBoxes()},250);
-
-    var c = document.getElementById("boxSet");
-    var ctx = c.getContext("2d");
-
-    // Create gradient
-    var grd = ctx.createRadialGradient(75,50,5,90,60,100);
-    grd.addColorStop(0,"red");
-    grd.addColorStop(1,"white");
-
-    // Fill with gradient
-    ctx.fillStyle = grd;
-    ctx.fillRect(10,10,140,140);
-});
-*/
