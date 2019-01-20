@@ -37,6 +37,11 @@ function generateCssColor(color) {
     return "rgb("+color[red]+","+color[green]+","+color[blue]+")";
 }
 
+/**
+ * Generate random colors for the number of boxes given in the states on and off
+ * @param   {Number}    Number of boxes
+ * @return  {Array}     Array of color for boxes turned on and off
+ */
 function generateBoxColors(numberOfBoxes) {
     let generatedBoxColors=[];
     generatedBoxColors[on]=[];
