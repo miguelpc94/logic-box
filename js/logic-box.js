@@ -20,7 +20,7 @@ function generateRandomColor() {
 
 /**
  * Take a color and cut its RGB components in half
- * @param   {Array}     Array with the RGB components
+ * @param   {color}     Array with the RGB components
  * @return  {Array}     Array with the RGB components
  */
 function halveColor(color) {
@@ -30,7 +30,7 @@ function halveColor(color) {
 /**
  * Take an array with the RGB components of a color and returns a string that represents
  * that color for CSS
- * @param   {Array}     Array with the RGB components
+ * @param   {color}     Array with the RGB components
  * @return  {String}    String of a CSS color
  */
 function generateCssColor(color) {
@@ -39,8 +39,8 @@ function generateCssColor(color) {
 
 /**
  * Generate random colors for the number of boxes given in the states on and off
- * @param   {Number}    Number of boxes
- * @return  {Array}     Array of color for boxes turned on and off
+ * @param   {numberOfBoxes}     Number of boxes
+ * @return  {Array}             Array of color for boxes turned on and off
  */
 function generateBoxColors(numberOfBoxes) {
     let generatedBoxColors=[];
@@ -55,6 +55,11 @@ function generateBoxColors(numberOfBoxes) {
     return generatedBoxColors;
 }
 
+/**
+ * Generate random array of booleans
+ * @param   {numberOfBooleans}    Number of booleans
+ * @return  {Array}     Array of random booleans
+ */
 function generateRandomBooleans(numberOfBooleans) {
     let randomBooleans=[];
     for (let index=0; index<numberOfBooleans; index++) {
@@ -67,6 +72,12 @@ function generateRandomBooleans(numberOfBooleans) {
     return randomBooleans;
 }
 
+/**
+ * Generate an object that controls a set of logic boxes of the given number of rows and column
+ * @param   {rows}          Number of rows
+ * @param   {column}        Number of columns
+ * @return  {Object}        Object that controls the set of logic boxes
+ */
 function createBoxSet(rows=1,columns=1) {
     let boxSet={};
     boxSet.rows=rows;
