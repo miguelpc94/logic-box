@@ -74,11 +74,11 @@ function generateRandomBooleans(numberOfBooleans) {
 }
 
 /**
- * Generate an object that controls a set of logic boxes of the given number of rows and column
+ * Generate an object that controls a set of logic boxes of the given number of rows and columns
  * @constructs BoxSet
  * @param   {number}    rows - Number of rows
- * @param   {number}    column - Number of columns
- * @return  {object}    Object that controls the set of logic boxes
+ * @param   {number}    columns - Number of columns
+ * @return  {BoxSet}    Object that controls a set of logic boxes
  */
 function createBoxSet(rows=1,columns=1) {
     let boxSet={};
