@@ -74,7 +74,8 @@ function generateRandomBooleans(numberOfBooleans) {
 }
 
 /**
- * Generate an object that controls a set of logic boxes of the given number of rows and columns
+ * Generate an object that controls a set of logic boxes of the given number of rows and columns.
+ * Each logic box inside the box set have an index. The index is distributed from left to right, top to bottom.
  * @constructs BoxSet
  * @param   {number}    rows - Number of rows
  * @param   {number}    columns - Number of columns
@@ -110,6 +111,12 @@ function createBoxSet(rows=1,columns=1) {
         }
         return true;
     };
+    /**
+    * Set the color of the logic boxes when they are off
+    * @memberof BoxSet
+    * @param   {array}      boxColors - Array with the RGB components
+    * @return  {boolean}    Whether it could set the colors
+    */
     boxSet.setBoxColorsOff = function(boxColors=[[255,255,255]]) {
         if (boxColors.length<(this.rows*this.columns)) {
             return false;
@@ -121,6 +128,11 @@ function createBoxSet(rows=1,columns=1) {
         }
         return true;
     };
+    /**
+    * Return the state of each logic box inside this BoxSet
+    * @memberof BoxSet
+    * @return  {array}    An array of booleans of the states
+    */
     boxSet.getBoxStates = function() {
         let boxStates=[];
         for (let boxIndex=0; boxIndex<(this.rows*this.columns); boxIndex++) {
@@ -128,6 +140,12 @@ function createBoxSet(rows=1,columns=1) {
         }
         return boxStates;
     };
+    /**
+    * Set the state of each logic box inside this BoxSet
+    * @memberof BoxSet
+    * @param   {array}    boxStates - An array of booleans of the states
+    * @return  {array}    An array of booleans of the states
+    */
     boxSet.setBoxStates = function(boxStates=[]) {
         if (boxStates.length<(this.rows*this.columns)) {
             return false;
@@ -137,6 +155,10 @@ function createBoxSet(rows=1,columns=1) {
         }
         return true;
     };
+    /**
+    * Draw the set of logic boxes in the canvas of ID canvasID
+    * @memberof BoxSet
+    */
     boxSet.draw = function() {
         let context = document.querySelector(this.canvasID).getContext("2d");
         context.clearRect(0,0,this.columns*boxWidth,this.columns*boxHeight);
