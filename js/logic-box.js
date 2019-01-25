@@ -74,8 +74,17 @@ function generateRandomBooleans(numberOfBooleans) {
 }
 
 /**
+ * TODO: Create the SoundBox object
+ */
+
+/**
+ * TODO: Create a function that render the canvas templete wit ha given height and width and return its ID
+ */
+
+/**
  * Generate an object that controls a set of logic boxes of the given number of rows and columns.
  * Each logic box inside the box set have an index. The index is distributed from left to right, top to bottom.
+ * TODO: The size of the canvas is given or taken from somewhere and the set is drawn to fit inside it
  * @constructs BoxSet
  * @param   {number}    rows - Number of rows
  * @param   {number}    columns - Number of columns
@@ -94,6 +103,11 @@ function createBoxSet(rows=1,columns=1) {
             state: false
         };
     };
+    /**
+    * TODO: A method that receives a canvas ID and read from it its width and height.
+    * With this info, calculates the size of the elememts to fit all inside the context
+    */
+
     /**
     * Set the color of the logic boxes when they are on
     * @memberof BoxSet
